@@ -98,14 +98,6 @@ int axasd::erase()
 
 std::string axasd::getData()
 {
-	/** std::stringstream datasstr;
-	int n = settings.range;
-	datasstr << ";";
-	for (int i = 0; i < n; i++)
-	datasstr << Data0[i] << ";"; 
-	return datasstr.str();**/
-
-
 	std::stringstream datasstr;
 	datasstr << ";";
 	long Errset = (*fpGetSettings)(&settings, DEV_ID);
@@ -118,7 +110,6 @@ std::string axasd::getData()
 	for (int i = 0; i < settings.range; i++)
 		datasstr << datp[i] << ";";
 	delete datp;
-
 	return datasstr.str();
 }
 
@@ -142,11 +133,22 @@ int axasd::updateSettings(std::string settingsStr)
 				settings.range = std::stol(value);
 			if (key == "prena")
 				settings.prena = std::stoi(value);
+			if (key == "gain")
+				settings.gain = std::stoi(value);
+			if (key == "shaping")
+				settings.shaping = std::stoi(value);
+			if (key == "threshold")
+				settings.prena = std::stoi(value);
 			if (key == "roimin")
 				settings.roimin = std::stol(value);
 			if (key == "roimax")
 				settings.roimax = std::stol(value);
-			
+			if (key == "roipreset")
+				settings.roipreset = std::stod(value);
+			if (key == "rtpreset")
+				settings.rtpreset = std::stod(value);
+			if (key == "ltpreset")
+				settings.ltpreset = std::stod(value);
 		}
 	}
 	(*fpStoreSettings)(&settings, DEV_ID);
